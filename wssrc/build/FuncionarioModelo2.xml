@@ -1,0 +1,33 @@
+<project name="WS"  default="generateClientFiles"  basedir=".">
+	
+	<property file="./webservices.properties"/>
+	 
+	<path id="ws.path">
+		<fileset dir="../../lib">
+			   <include name="**/**.jar"/>    
+			  </fileset>
+			  <fileset dir="${java.dir}/lib">
+			    <include name="**/tools.jar"/>    
+			  </fileset>
+		</path>
+		
+	<target name="generateClientFiles">
+		
+		<taskdef name="wsconsume" classname="org.jboss.wsf.spi.tools.ant.WSConsumeTask">
+			<classpath refid="ws.path"/>						
+		</taskdef>
+		<wsconsume 
+		  fork="true"
+		  verbose="true"
+		  debug="true"		  	
+		  sourcedestdir="../"	
+		  keep="true"		  	
+		  destdir="../../bin"
+		  package="webservices.modelo2"
+		  wsdl="http://www.p-soc.com.br/WSSoc/FuncionarioModelo2Ws?wsdl">	
+		</wsconsume>
+		
+		
+	</target>
+
+</project>
